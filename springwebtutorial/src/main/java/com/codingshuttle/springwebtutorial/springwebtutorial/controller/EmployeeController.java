@@ -1,23 +1,20 @@
 package com.codingshuttle.springwebtutorial.springwebtutorial.controller;
 
 import com.codingshuttle.springwebtutorial.springwebtutorial.dto.EmployeeDto;
-import com.codingshuttle.springwebtutorial.springwebtutorial.entity.EmployeeEntity;
-import com.codingshuttle.springwebtutorial.springwebtutorial.repository.EmployeeRepository;
+import com.codingshuttle.springwebtutorial.springwebtutorial.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
-
 
 
     @GetMapping(path = "/getSecretMessage")
@@ -26,18 +23,18 @@ public class EmployeeController {
     }
 
     @GetMapping(path= "/{employeeId}")
-    public EmployeeEntity getEmployeeById(@PathVariable Long employeeId){
-        return employeeRepository.findById(employeeId).orElse(null);
+    public EmployeeDto getEmployeeById(@PathVariable Long employeeId){
+        return this.employeeService.getOneEmployeeById(employeeId);
 
     }
 
     @GetMapping
-    public List<EmployeeEntity> getEmployeeList(@RequestParam(required = false ) String name){
-        return employeeRepository.findAll();
+    public List<EmployeeDto> getEmployeeList(@RequestParam(required = false ) String name){
+        return this.employeeService.getAllEmployees();
     }
 
     @PostMapping
-    public EmployeeEntity addEmployee(@RequestBody EmployeeEntity employeeEntity){
-        return employeeRepository.save(employeeEntity);
+    public EmployeeDto addEmployee(@RequestBody EmployeeDto employeeDto){
+        return this.employeeService.saveOneEmployee(employeeDto);
     }
 }
