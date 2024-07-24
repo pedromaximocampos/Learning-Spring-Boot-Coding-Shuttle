@@ -5,8 +5,12 @@ import com.codingshuttle.springwebtutorial.springwebtutorial.entity.EmployeeEnti
 import com.codingshuttle.springwebtutorial.springwebtutorial.repository.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -19,8 +23,13 @@ public class EmployeeService {
         this.modelMapper = modelMapper;
     }
 
+    public Boolean isExistent(Long employeeId){
+        return employeeRepository.existsById(employeeId);
+    }
+
     public EmployeeDto getOneEmployeeById(Long id) {
         EmployeeEntity employeeEntity = this.employeeRepository.findById(id).orElse(null);
+        if (employeeEntity == null) return null;
         return modelMapper.map(employeeEntity, EmployeeDto.class);
     }
 
@@ -40,4 +49,32 @@ public class EmployeeService {
         return modelMapper.map(result, EmployeeDto.class);
     }
 
+    public EmployeeDto putEmployeeById(Long employeeId, EmployeeDto employeeDto) {
+        EmployeeEntity newEmployeeEntity = this.modelMapper.map(employeeDto, EmployeeEntity.class);
+        newEmployeeEntity.setId(employeeId);
+        EmployeeEntity result = this.employeeRepository.save(newEmployeeEntity);
+        return modelMapper.map(result, EmployeeDto.class);
+    }
+
+    public EmployeeDto deleteEmployeeById(Long employeeId) {
+        EmployeeEntity employeeEntity = this.employeeRepository.findById(employeeId).orElse(null);
+        if(employeeEntity == null) return null;
+        this.employeeRepository.delete(employeeEntity);
+        return modelMapper.map(employeeEntity, EmployeeDto.class);
+
+    }
+
+    public EmployeeDto updateEmployeePropertiesById(Long employeeId, Map<String, Object> updates) {
+        EmployeeEntity employeeEntity = this.employeeRepository.findById(employeeId).orElse(null);
+        if(employeeEntity == null) return null;
+        // Java Reflection ...
+        updates.forEach((key, value) -> {
+            Field employeefield = ReflectionUtils.findField((EmployeeEntity.class), key);
+            assert employeefield != null;
+            employeefield.setAccessible(true);
+            ReflectionUtils.setField(employeefield, employeeEntity, value);
+        });
+        this.employeeRepository.save(employeeEntity);
+        return modelMapper.map(employeeEntity, EmployeeDto.class);
+    }
 }

@@ -1,7 +1,17 @@
 package com.codingshuttle.springwebtutorial.springwebtutorial.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeDto {
 
     private Long id;
@@ -10,53 +20,4 @@ public class EmployeeDto {
     private LocalDate dateOfJoining;
     private Boolean isActive;
 
-    public EmployeeDto() {}
-
-    public EmployeeDto(Long id, String name, String email, LocalDate dateOfJoining, Boolean isActive) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.dateOfJoining = dateOfJoining;
-        this.isActive = isActive;
-    }
-
-    public void setDateOfJoining(LocalDate dateOfJoining) {
-        this.dateOfJoining = dateOfJoining;
-    }
-    public  LocalDate  getDateOfJoining() {
-        return dateOfJoining;
-    }
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-
-
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Boolean getActive() {
-        return isActive;
-    }
-
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
 }
