@@ -2,6 +2,7 @@ package com.codingshuttle.springwebtutorial.springwebtutorial.controller;
 
 import com.codingshuttle.springwebtutorial.springwebtutorial.dto.EmployeeDto;
 import com.codingshuttle.springwebtutorial.springwebtutorial.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class EmployeeController {
     }
 
     @GetMapping(path= "/{employeeId}")
-    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable Long employeeId){
+    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable @Valid Long employeeId){
         EmployeeDto employeeFound = this.employeeService.getOneEmployeeById(employeeId);
         if (employeeFound == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(employeeFound);
@@ -39,13 +40,13 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeDto> addEmployee(@RequestBody EmployeeDto employeeDto){
+    public ResponseEntity<EmployeeDto> addEmployee(@RequestBody @Valid EmployeeDto employeeDto){
         EmployeeDto newEmployeeDto  = this.employeeService.saveOneEmployee(employeeDto);
         return ResponseEntity.ok(newEmployeeDto);
     }
 
     @PutMapping("/{employeeId}")
-    public ResponseEntity<EmployeeDto> putEmployeeById(@RequestBody EmployeeDto employeeDto, @PathVariable Long employeeId){
+    public ResponseEntity<EmployeeDto> putEmployeeById(@RequestBody @Valid EmployeeDto employeeDto, @PathVariable Long employeeId){
         EmployeeDto newEmployeeDto = this.employeeService.putEmployeeById(employeeId, employeeDto);
         return ResponseEntity.ok(newEmployeeDto);
     }
