@@ -53,7 +53,6 @@ public class EmployeeController {
     @DeleteMapping("/{employeeId}")
     public ResponseEntity<EmployeeDto> deleteEmployeeById(@PathVariable Long employeeId){
         EmployeeDto employeeDto = this.employeeService.deleteEmployeeById(employeeId);
-        if (employeeDto == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(employeeDto);
     }
 
