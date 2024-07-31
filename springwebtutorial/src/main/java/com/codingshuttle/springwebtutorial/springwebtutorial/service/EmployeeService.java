@@ -2,6 +2,7 @@ package com.codingshuttle.springwebtutorial.springwebtutorial.service;
 
 import com.codingshuttle.springwebtutorial.springwebtutorial.dto.EmployeeDto;
 import com.codingshuttle.springwebtutorial.springwebtutorial.entity.EmployeeEntity;
+import com.codingshuttle.springwebtutorial.springwebtutorial.exceptions.NoSuchResouceFound;
 import com.codingshuttle.springwebtutorial.springwebtutorial.repository.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,14 @@ public class EmployeeService {
         this.modelMapper = modelMapper;
     }
 
-    public Boolean isExistent(Long employeeId){
-        return employeeRepository.existsById(employeeId);
+    public void isExistent(Long employeeId){
+        boolean exists =  employeeRepository.existsById(employeeId);
+        if(!exists) throw new NoSuchResouceFound("Employee with id "+employeeId+" does not exist");
     }
 
     public EmployeeDto getOneEmployeeById(Long id) {
+        isExistent(id);
         EmployeeEntity employeeEntity = this.employeeRepository.findById(id).orElse(null);
-        if (employeeEntity == null) return null;
         return modelMapper.map(employeeEntity, EmployeeDto.class);
     }
 
@@ -50,23 +52,27 @@ public class EmployeeService {
     }
 
     public EmployeeDto putEmployeeById(Long employeeId, EmployeeDto employeeDto) {
+        isExistent(employeeId);
         EmployeeEntity newEmployeeEntity = this.modelMapper.map(employeeDto, EmployeeEntity.class);
         newEmployeeEntity.setId(employeeId);
         EmployeeEntity result = this.employeeRepository.save(newEmployeeEntity);
         return modelMapper.map(result, EmployeeDto.class);
     }
 
+
+
     public EmployeeDto deleteEmployeeById(Long employeeId) {
-        EmployeeEntity employeeEntity = this.employeeRepository.findById(employeeId).orElse(null);
-        if(employeeEntity == null) return null;
+        isExistent(employeeId);
+        EmployeeEntity employeeEntity = this.employeeRepository.findById(employeeId).get();
         this.employeeRepository.delete(employeeEntity);
         return modelMapper.map(employeeEntity, EmployeeDto.class);
 
     }
 
     public EmployeeDto updateEmployeePropertiesById(Long employeeId, Map<String, Object> updates) {
-        EmployeeEntity employeeEntity = this.employeeRepository.findById(employeeId).orElse(null);
-        if(employeeEntity == null) return null;
+        isExistent(employeeId);
+        EmployeeEntity employeeEntity = this.employeeRepository.findById(employeeId).get();
+
         // Java Reflection ...
         updates.forEach((key, value) -> {
             Field employeefield = ReflectionUtils.findField((EmployeeEntity.class), key);

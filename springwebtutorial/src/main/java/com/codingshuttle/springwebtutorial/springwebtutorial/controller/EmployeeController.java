@@ -29,7 +29,6 @@ public class EmployeeController {
     @GetMapping(path= "/{employeeId}")
     public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable @Valid Long employeeId){
         EmployeeDto employeeFound = this.employeeService.getOneEmployeeById(employeeId);
-        if (employeeFound == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(employeeFound);
     }
 
