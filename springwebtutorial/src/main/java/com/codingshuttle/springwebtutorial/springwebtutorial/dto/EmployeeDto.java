@@ -1,5 +1,7 @@
 package com.codingshuttle.springwebtutorial.springwebtutorial.dto;
 
+import com.codingshuttle.springwebtutorial.springwebtutorial.Annotations.EmployeeNumberValidation;
+import com.codingshuttle.springwebtutorial.springwebtutorial.Annotations.EmployeePasswordValidation;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,4 +34,13 @@ public class EmployeeDto {
     @AssertTrue(message = "Employee must be active")
     private Boolean isActive;
 
+
+    @NotBlank
+    @Size(min = 10, max = 20,  message = "Password field must be at least 10 characters and max of 20 characters.")
+    @EmployeePasswordValidation
+    private String password;
+
+    @NotNull
+    @EmployeeNumberValidation
+    private Integer number;
 }

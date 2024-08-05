@@ -59,7 +59,6 @@ public class EmployeeController {
     @PatchMapping("/{employeeId}")
     public ResponseEntity<EmployeeDto> patchEmployeeById(@RequestBody Map<String, Object> updates, @PathVariable Long employeeId){
         EmployeeDto newEmployeeDto = this.employeeService.updateEmployeePropertiesById(employeeId, updates);
-        if (newEmployeeDto == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(newEmployeeDto);
     }
 }
