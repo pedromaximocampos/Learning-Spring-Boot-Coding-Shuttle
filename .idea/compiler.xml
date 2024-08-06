@@ -9,11 +9,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="week1" />
         <module name="springwebtutorial" />
+        <module name="Jpa-Tutorial" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Jpa-Tutorial" options="-parameters" />
       <module name="springwebtutorial" options="-parameters" />
       <module name="week1" options="-parameters" />
     </option>
