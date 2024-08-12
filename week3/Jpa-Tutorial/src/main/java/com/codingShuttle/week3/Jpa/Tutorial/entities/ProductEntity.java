@@ -44,7 +44,7 @@ public class ProductEntity {
 
     private Integer quantity;
 
-    private Float price;
+    private Double price;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
