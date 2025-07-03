@@ -42,8 +42,10 @@ public class ProductEntity {
     @Column(length = 150)
     private String description;
 
+    @Column(nullable = false)
     private Integer quantity;
 
+    @Column(nullable = false)
     private Double price;
 
     @CreationTimestamp
