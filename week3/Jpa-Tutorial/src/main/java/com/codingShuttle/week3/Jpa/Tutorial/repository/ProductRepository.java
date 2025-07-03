@@ -3,6 +3,7 @@ package com.codingShuttle.week3.Jpa.Tutorial.repository;
 import com.codingShuttle.week3.Jpa.Tutorial.entities.ProductEntity;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.apache.logging.log4j.util.ProcessIdUtil;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,10 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRepository  extends JpaRepository<ProductEntity, Long> {
+
+    List<ProductEntity> findByOrderByPriceDesc();
+
+    List<ProductEntity> findBy(Sort sort);
 
     List<ProductEntity> findBySku(String sku);
 
@@ -38,6 +43,7 @@ public interface ProductRepository  extends JpaRepository<ProductEntity, Long> {
 
     Optional<ProductEntity> findByTitleAndDescription(String title, String description);
 
+    List<ProductEntity> findByTitleAndPriceOrderByTitle(String title, Double price);
 
 
     @Query("select  e from ProductEntity e where e.title=?1 and e.price=?2")
