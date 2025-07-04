@@ -3,6 +3,8 @@ package com.codingShuttle.week3.Jpa.Tutorial.repository;
 import com.codingShuttle.week3.Jpa.Tutorial.entities.ProductEntity;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.apache.logging.log4j.util.ProcessIdUtil;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,7 +29,7 @@ public interface ProductRepository  extends JpaRepository<ProductEntity, Long> {
 
     List<ProductEntity> findByPriceBetween(Double lower, Double higher);
 
-    List<ProductEntity> findByTitleContaining(String title);
+    Page<ProductEntity> findByTitleContaining(Pageable page, String title);
 
     List<ProductEntity> findByCreatedAtAfter(LocalDateTime createdAt);
 

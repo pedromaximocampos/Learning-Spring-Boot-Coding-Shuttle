@@ -2,8 +2,11 @@ package com.codingShuttle.week3.Jpa.Tutorial.service;
 
 
 import com.codingShuttle.week3.Jpa.Tutorial.dto.ProductDto;
+import com.codingShuttle.week3.Jpa.Tutorial.dto.ProductPageResponseDto;
 import com.codingShuttle.week3.Jpa.Tutorial.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +33,23 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    public List<ProductDto> getAllProductsPageble(Pageable page) {
+        return  productRepository.findAll(page).stream()
+                .map(productEntity -> modelMapper.map(productEntity, ProductDto.class))
+                .collect(Collectors.toList());
+    }
+
+
+    public ProductPageResponseDto getProductsByTitle(Pageable page, String title) {
+        Page<?> productsPage =  productRepository.findByTitleContaining(page, title);
+        List<ProductDto> products = productsPage.stream()
+                .map(productEntity -> modelMapper.map(productEntity, ProductDto.class))
+                .toList();
+
+        ProductPageResponseDto productPageResponseDto = new ProductPageResponseDto();
+        productPageResponseDto.setTotalPages(productsPage.getTotalPages());
+        productPageResponseDto.setProducts(products);
+
+        return productPageResponseDto;
+    }
 }
