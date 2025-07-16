@@ -1,4 +1,4 @@
-package com.codingShuttle.week3.Jpa.Tutorial.configs;
+package com.codingShuttle.week3.Jpa.Tutorial.configs.Mapping;
 
 
 import org.springframework.context.annotation.Bean;
