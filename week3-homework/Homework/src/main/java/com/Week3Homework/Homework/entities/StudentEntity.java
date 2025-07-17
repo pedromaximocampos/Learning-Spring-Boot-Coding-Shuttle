@@ -32,7 +32,7 @@ public class StudentEntity {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "subject_id")
     )
-    private Set<SubjectEntity> subjects;
+    private Set<SubjectEntity> subjects = new HashSet<>();
 
     // BIDIRECIONAL: OneToOne com AdmissionRecord - lado inverso
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -44,5 +44,5 @@ public class StudentEntity {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "professor_id")
     )
-    private Set<ProfessorEntity> professors;
+    private Set<ProfessorEntity> professors = new HashSet<>();
 }

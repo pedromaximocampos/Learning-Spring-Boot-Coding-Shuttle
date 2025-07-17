@@ -18,7 +18,5 @@ public class ProfessorWithSubjectsDto {
     
     // Lista de matérias usando DTO existente
     private List<SubjectDto> subjects;
-    
-    // Informações adicionais úteis
-    private Integer totalSubjects;
+
 } 

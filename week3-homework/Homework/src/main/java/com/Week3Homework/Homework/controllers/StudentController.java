@@ -27,12 +27,12 @@ public class StudentController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentWithSubjectsDto> getStudentById(Long id) {
+    public ResponseEntity<StudentWithSubjectsDto> getStudentById(@PathVariable Long id) {
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
 
     @PostMapping
-    public ResponseEntity<StudentDto> createStudent(StudentDto studentDto) {
+    public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto studentDto) {
         return ResponseEntity.ok(studentService.createStudent(studentDto));
     }
 

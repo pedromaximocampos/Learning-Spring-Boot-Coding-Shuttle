@@ -4,10 +4,7 @@ import com.Week3Homework.Homework.dto.ProfessorDto;
 import com.Week3Homework.Homework.dto.ProfessorWithSubjectsDto;
 import com.Week3Homework.Homework.service.ProfessorService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,13 +27,13 @@ public class ProfessorController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProfessorWithSubjectsDto> getProfessorById(Long id) {
+    public ResponseEntity<ProfessorWithSubjectsDto> getProfessorById(@PathVariable Long id) {
         return ResponseEntity.ok(professorService.getProfessorById(id));
     }
 
 
     @PostMapping
-    public ResponseEntity<ProfessorDto> createProfessor(ProfessorDto professorDto) {
+    public ResponseEntity<ProfessorDto> createProfessor(@RequestBody ProfessorDto professorDto) {
         return ResponseEntity.ok(professorService.createProfessor(professorDto));
     }
 }

@@ -20,6 +20,6 @@ public class StudentWithSubjectsDto {
     // Matérias com professor incluído
     private List<SubjectWithProfessorDto> subjects;
 
-    private AdmissionEntity admission;
+    private AdmissionWithoutStudentDto admission;
     
 } 

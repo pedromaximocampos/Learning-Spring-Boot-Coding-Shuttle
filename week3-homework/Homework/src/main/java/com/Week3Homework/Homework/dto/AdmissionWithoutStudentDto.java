@@ -1,20 +1,16 @@
 package com.Week3Homework.Homework.dto;
 
-import lombok.*;
 
+import lombok.*;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdmissionDto {
+public class AdmissionWithoutStudentDto {
 
     private Long id;
 
     @NonNull
     private Integer fees;
-
-    private StudentDto student;
-
-
 }

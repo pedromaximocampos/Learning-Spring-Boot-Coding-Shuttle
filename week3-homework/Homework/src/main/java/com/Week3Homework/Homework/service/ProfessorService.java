@@ -40,7 +40,8 @@ public class ProfessorService {
 
     public ProfessorWithSubjectsDto getProfessorById(Long id) {
         ProfessorEntity professor = professorRepository.findProfessorWithSubjectsById(id)
-                .orElseThrow(() -> new ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Professor não encontrado"));
+                .orElse( professorRepository.findById(id)
+                        .orElseThrow(() -> new ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Professor não encontrado")));
 
         return modelMapper.map(professor, ProfessorWithSubjectsDto.class);
     }
