@@ -18,7 +18,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Builder
 @Entity
 @Table(name = "appointments")
-public class Appointment {
+public class AppointmentEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -34,11 +34,13 @@ public class Appointment {
     @Column(nullable = false, length = 30)
     private AppointmentStatus status = AppointmentStatus.SCHEDULED;
 
-
     @ManyToOne
     @JoinColumn(name = "patient_id", referencedColumnName = "id", nullable = false)
     private PatientEntity patient;
 
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
+    private DoctorEntity doctor;
 
     @PrePersist
     private void prePersist() {
