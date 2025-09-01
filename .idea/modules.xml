@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/CodingShuttleCourse.iml" filepath="$PROJECT_DIR$/.idea/CodingShuttleCourse.iml" />
       <module fileurl="file://$PROJECT_DIR$/week3/Jpa-Tutorial/Jpa-Tutorial.iml" filepath="$PROJECT_DIR$/week3/Jpa-Tutorial/Jpa-Tutorial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Review-Hibernate-and-JPA/Review-Hibernate-and-JPA.iml" filepath="$PROJECT_DIR$/Review-Hibernate-and-JPA/Review-Hibernate-and-JPA.iml" />
     </modules>
   </component>
 </project>
