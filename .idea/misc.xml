@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
@@ -8,6 +9,7 @@
         <option value="$PROJECT_DIR$/week3/Jpa-Tutorial/pom.xml" />
         <option value="$PROJECT_DIR$/week3-homework/Homework/Homework/pom.xml" />
         <option value="$PROJECT_DIR$/week3-homework/Homework/pom.xml" />
+        <option value="$PROJECT_DIR$/Review-Hibernate-and-JPA/pom.xml" />
       </list>
     </option>
   </component>
