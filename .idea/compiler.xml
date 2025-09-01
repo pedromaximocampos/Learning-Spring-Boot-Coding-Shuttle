@@ -14,7 +14,7 @@
         <module name="Homework" />
         <module name="Jpa-Tutorial (2)" />
       </profile>
-      <profile name="Annotation profile for Review-Hibernate-and-JPA" enabled="true">
+      <profile name="Annotation profile for prod-ready-features" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -22,6 +22,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="Review-Hibernate-and-JPA" />
+        <module name="prod-ready-features" />
       </profile>
     </annotationProcessing>
   </component>
@@ -32,6 +33,7 @@
       <module name="Jpa-Tutorial (1)" options="-parameters" />
       <module name="Jpa-Tutorial (2)" options="-parameters" />
       <module name="Review-Hibernate-and-JPA" options="-parameters" />
+      <module name="prod-ready-features" options="-parameters" />
       <module name="springwebtutorial" options="-parameters" />
       <module name="week1" options="-parameters" />
     </option>
