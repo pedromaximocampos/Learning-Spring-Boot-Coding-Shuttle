@@ -1,15 +1,18 @@
 package com.week4.prod_ready_features.prod_ready_features.services;
 
-import com.week4.prod_ready_features.prod_ready_features.dto.PostDTO;
+import com.week4.prod_ready_features.prod_ready_features.dto.Posts.PostCreationDTO;
+import com.week4.prod_ready_features.prod_ready_features.dto.Posts.PostResponseDTO;
 
 import java.util.List;
 
 public interface PostService {
 
-    List<PostDTO> getAllPosts();
+    List<PostResponseDTO> getAllPosts();
 
-    PostDTO createPost(PostDTO postDTO);
+    PostResponseDTO createPost(PostCreationDTO postCreationDTO);
 
-    PostDTO getPostById(Long id);
+    PostResponseDTO getPostById(Long id);
+
+    PostResponseDTO updatePost(PostCreationDTO inputPost, Long postId);
 
 }

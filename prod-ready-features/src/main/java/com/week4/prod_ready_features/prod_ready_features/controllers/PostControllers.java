@@ -1,9 +1,9 @@
 package com.week4.prod_ready_features.prod_ready_features.controllers;
 
 
-import com.week4.prod_ready_features.prod_ready_features.dto.PostDTO;
+import com.week4.prod_ready_features.prod_ready_features.dto.Posts.PostCreationDTO;
+import com.week4.prod_ready_features.prod_ready_features.dto.Posts.PostResponseDTO;
 import com.week4.prod_ready_features.prod_ready_features.services.PostService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,20 +18,24 @@ public class PostControllers {
         this.postService = postService;
     }
 
-
     @GetMapping
-    public List<PostDTO> getAllPosts() {
+    public List<PostResponseDTO> getAllPosts() {
         return postService.getAllPosts();
     }
 
     @PostMapping
-    public PostDTO createNewPost(@RequestBody PostDTO postDTO) {
-        return postService.createPost(postDTO);
+    public PostResponseDTO createNewPost(@RequestBody PostCreationDTO postCreationDTO) {
+        return postService.createPost(postCreationDTO);
     }
 
     @GetMapping("/{id}")
-    public PostDTO getPostById(@PathVariable Long id) {
+    public PostResponseDTO getPostById(@PathVariable Long id) {
         return postService.getPostById(id);
+    }
+
+    @PutMapping("/{postId}")
+    public PostResponseDTO updatePost(@RequestBody PostCreationDTO inputPost, @PathVariable Long postId) {
+        return postService.updatePost(inputPost, postId);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.week4.prod_ready_features.prod_ready_features.dto;
+package com.week4.prod_ready_features.prod_ready_features.dto.Posts;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostDTO {
+public class PostCreationDTO {
 
     @NotNull
     private String title;
