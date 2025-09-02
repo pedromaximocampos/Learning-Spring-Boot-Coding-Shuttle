@@ -1,7 +1,5 @@
-package com.codingshuttle.springwebtutorial.springwebtutorial.dto;
+package com.week4.prod_ready_features.prod_ready_features.dto.Employees;
 
-import com.codingshuttle.springwebtutorial.springwebtutorial.Annotations.EmployeeNumberValidation;
-import com.codingshuttle.springwebtutorial.springwebtutorial.Annotations.EmployeePasswordValidation;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,13 +7,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-
+import java.util.Date;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeDto {
+public class EmployeeDTO {
 
     private Long id;
 
@@ -27,6 +25,7 @@ public class EmployeeDto {
     @Email(message = "Email field must be a valid email")
     private String email;
 
+
     private LocalDate dateOfJoining;
 
     @AssertTrue(message = "Employee must be active")
@@ -35,10 +34,10 @@ public class EmployeeDto {
 
     @NotBlank
     @Size(min = 10, max = 20,  message = "Password field must be at least 10 characters and max of 20 characters.")
-    @EmployeePasswordValidation
     private String password;
 
     @NotNull
-    @EmployeeNumberValidation
     private Integer number;
+
+
 }
