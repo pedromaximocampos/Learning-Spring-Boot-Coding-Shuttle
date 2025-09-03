@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <!-- Lê propriedades do Spring (com valores padrão se não existirem) -->
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="my-app"/>
+    <springProperty scope="context" name="LOG_PATH" source="logging.file.path" defaultValue="logs"/>
+
+    <!-- Padrão de log -->
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+
+    <!-- Saída no console -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Arquivo com rotação diária + por tamanho (10MB) -->
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- arquivo atual -->
+        <file>${LOG_PATH}/${APP_NAME}.log</file>
+
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+
+        <!-- Política de rotação por tempo e tamanho -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--
+              Gera arquivos no formato:
+              logs/my-app-2025-09-02.0.log.gz, logs/my-app-2025-09-02.1.log.gz, ...
+            -->
+            <fileNamePattern>${LOG_PATH}/${APP_NAME}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+
+            <!-- Tamanho máximo por arquivo antes de criar o próximo índice -->
+            <maxFileSize>10MB</maxFileSize>
+
+            <!-- Tempo de retenção (quantos dias manter) -->
+            <maxHistory>30</maxHistory>
+
+            <!-- Tamanho total máximo do histórico (opcional, ajuda a limitar disco) -->
+            <totalSizeCap>3GB</totalSizeCap>
+
+            <!-- Limpa histórico com base nas regras ao iniciar -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Níveis específicos (opcional; ajuste se quiser menos verbosidade) -->
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.hibernate" level="WARN"/>
+
+    <!-- Raiz: loga no console e em arquivo -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ROLLING"/>
+    </root>
+</configuration>
