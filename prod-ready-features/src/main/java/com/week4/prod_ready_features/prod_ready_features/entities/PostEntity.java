@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class PostEntity extends AuditableEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     private Long id;
 
 
