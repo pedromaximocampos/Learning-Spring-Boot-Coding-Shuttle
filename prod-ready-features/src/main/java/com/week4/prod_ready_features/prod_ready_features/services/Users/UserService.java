@@ -1,5 +1,6 @@
 package com.week4.prod_ready_features.prod_ready_features.services.Users;
 
+import com.week4.prod_ready_features.prod_ready_features.entities.UserEntity;
 import com.week4.prod_ready_features.prod_ready_features.exceptions.ResourceNotFoundException;
 import com.week4.prod_ready_features.prod_ready_features.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +21,10 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByEmail(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with email: "+ username));
+    }
+
+    public UserEntity getUserById(Long id){
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: "+ id));
     }
 }
