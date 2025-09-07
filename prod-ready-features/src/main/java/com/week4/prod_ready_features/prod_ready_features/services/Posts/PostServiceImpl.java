@@ -1,11 +1,10 @@
-package com.week4.prod_ready_features.prod_ready_features.services;
+package com.week4.prod_ready_features.prod_ready_features.services.Posts;
 
 import com.week4.prod_ready_features.prod_ready_features.dto.Posts.PostCreationDTO;
 import com.week4.prod_ready_features.prod_ready_features.dto.Posts.PostResponseDTO;
 import com.week4.prod_ready_features.prod_ready_features.entities.PostEntity;
 import com.week4.prod_ready_features.prod_ready_features.exceptions.ResourceNotFoundException;
 import com.week4.prod_ready_features.prod_ready_features.repositories.PostRepository;
-import jakarta.annotation.PostConstruct;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import java.util.List;
 
 
 @Service
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final ModelMapper modelMapper;

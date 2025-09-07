@@ -1,4 +1,4 @@
-package com.week4.prod_ready_features.prod_ready_features.services;
+package com.week4.prod_ready_features.prod_ready_features.services.Posts;
 
 import com.week4.prod_ready_features.prod_ready_features.dto.Posts.PostCreationDTO;
 import com.week4.prod_ready_features.prod_ready_features.dto.Posts.PostResponseDTO;

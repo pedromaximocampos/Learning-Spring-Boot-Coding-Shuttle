@@ -3,7 +3,7 @@ package com.week4.prod_ready_features.prod_ready_features.controllers;
 
 import com.week4.prod_ready_features.prod_ready_features.dto.Posts.PostCreationDTO;
 import com.week4.prod_ready_features.prod_ready_features.dto.Posts.PostResponseDTO;
-import com.week4.prod_ready_features.prod_ready_features.services.PostService;
+import com.week4.prod_ready_features.prod_ready_features.services.Posts.PostService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

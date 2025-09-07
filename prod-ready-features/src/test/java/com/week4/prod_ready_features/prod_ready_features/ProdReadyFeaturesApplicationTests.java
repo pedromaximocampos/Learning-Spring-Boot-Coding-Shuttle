@@ -3,16 +3,14 @@ package com.week4.prod_ready_features.prod_ready_features;
 import com.week4.prod_ready_features.prod_ready_features.clients.EmployeeClient.EmployeeClient;
 import com.week4.prod_ready_features.prod_ready_features.dto.Employees.EmployeeDTO;
 import com.week4.prod_ready_features.prod_ready_features.entities.UserEntity;
-import com.week4.prod_ready_features.prod_ready_features.services.JwtService;
+import com.week4.prod_ready_features.prod_ready_features.services.Auth.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.client.RestClient;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @SpringBootTest

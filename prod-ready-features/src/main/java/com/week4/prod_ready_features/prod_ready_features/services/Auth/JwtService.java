@@ -1,4 +1,4 @@
-package com.week4.prod_ready_features.prod_ready_features.services;
+package com.week4.prod_ready_features.prod_ready_features.services.Auth;
 
 
 
@@ -6,7 +6,6 @@ import com.week4.prod_ready_features.prod_ready_features.entities.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.ScopeMetadata;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
