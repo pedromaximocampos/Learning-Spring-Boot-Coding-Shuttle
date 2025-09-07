@@ -26,7 +26,7 @@ Este repositório reúne projetos do curso que ensina os fundamentos de Spring B
 - week3/Jpa-Tutorial/: fundamentos de JPA/Hibernate (entidades, relacionamentos, repositórios)
 - week3-homework/Homework/: exercícios aplicados de JPA
 - Review-Hibernate-and-JPA/: revisão de conceitos JPA/Hibernate
-- prod-ready-features/: recursos para produção (observabilidade, validação, perfis, etc.)
+- prod-ready-features/: recursos para produção (observabilidade, validação, perfis, etc.) e Seguraça (SpringSecurity, JWT)
 
 ## Tópicos do curso
 
