@@ -9,8 +9,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.SqlReturnType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,19 +24,19 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import java.io.IOException;
 
 @Component
-@NoArgsConstructor
+@Order(1)
+@RequiredArgsConstructor
 public class JwtFilters extends OncePerRequestFilter {
 
-    private JwtService jwtService;
-    private UserService userService;
+    private final JwtService jwtService;
+    private final UserService userService;
 
     // Temos que injetar o HandlerExceptionResolver para tratar exceções dentro do filtro, pois o contexto do filtro
     // não é o mesmo do contexto do controller, logo o @ControllerAdvice não funciona aqui.
     // Usamos o Autowired com Qualifier para especificar o bean correto do HandlerExceptionResolver, pois com o NoArgsConstructor
     // o Spring não consegue injetar automaticamente via construtor, por ja ter um Bean criado para o HandlerExceptionResolver.
-    @Autowired
     @Qualifier("handlerExceptionResolver")
-    private HandlerExceptionResolver handlerExceptionResolver;
+    private final HandlerExceptionResolver handlerExceptionResolver;
 
 
 

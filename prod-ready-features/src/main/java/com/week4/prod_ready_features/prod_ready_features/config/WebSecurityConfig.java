@@ -1,6 +1,7 @@
 package com.week4.prod_ready_features.prod_ready_features.config;
 
 import com.week4.prod_ready_features.prod_ready_features.filters.JwtFilters;
+import com.week4.prod_ready_features.prod_ready_features.filters.LogsFilters;
 import jakarta.servlet.annotation.WebServlet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
 
     private final JwtFilters jwtFilters;
+    private final LogsFilters logsFilters;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -32,6 +34,7 @@ public class WebSecurityConfig {
                 .sessionManagement(sessionConfig -> sessionConfig
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
+                .addFilterBefore(logsFilters, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtFilters, UsernamePasswordAuthenticationFilter.class);
 
 
