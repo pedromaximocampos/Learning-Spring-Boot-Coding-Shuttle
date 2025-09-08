@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Table(name = "users")
 public class UserEntity implements UserDetails {
 
     @Id
@@ -25,6 +26,10 @@ public class UserEntity implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private String name;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

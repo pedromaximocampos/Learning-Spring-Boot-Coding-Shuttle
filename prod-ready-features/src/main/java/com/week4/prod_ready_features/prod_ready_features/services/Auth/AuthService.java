@@ -6,6 +6,7 @@ import com.week4.prod_ready_features.prod_ready_features.dto.Auth.SignUpDTO;
 import com.week4.prod_ready_features.prod_ready_features.dto.Users.UserDTO;
 import com.week4.prod_ready_features.prod_ready_features.entities.UserEntity;
 import com.week4.prod_ready_features.prod_ready_features.repositories.UserRepository;
+import com.week4.prod_ready_features.prod_ready_features.repositories.UserSessionRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +27,8 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final ModelMapper modelMapper;
     private final JwtService jwtService;
+    private final UserSessionService userSessionService;
+    private final UserSessionRepository userSessionRepository;
 
 
     public UserDTO signUp(SignUpDTO signUpDTO){
@@ -49,7 +52,11 @@ public class AuthService {
 
         UserEntity userEntity = (UserEntity) authentication.getPrincipal();
 
-        return jwtService.generateToken(userEntity);
+        String tokenJwt =  jwtService.generateToken(userEntity);
+
+        userSessionService.createNewUserSession(tokenJwt, userEntity.getId());
+
+        return tokenJwt;
     }
 
 }
