@@ -10,13 +10,13 @@ import java.time.LocalDateTime;
 public class ApiError {
 
     private HttpStatus statusCode;
-    private String message;
+    private String error;
     private LocalDateTime timestamp;
 
-    public ApiError(HttpStatus statusCode, String message) {
+    public ApiError(HttpStatus statusCode, String error) {
         this();
         this.statusCode = statusCode;
-        this.message = message;
+        this.error = error;
 
     }
 
