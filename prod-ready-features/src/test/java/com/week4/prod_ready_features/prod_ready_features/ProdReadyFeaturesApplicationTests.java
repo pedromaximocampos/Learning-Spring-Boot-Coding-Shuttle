@@ -59,7 +59,7 @@ class ProdReadyFeaturesApplicationTests {
 		user.setId(1L);
 		user.setEmail("pedro@gmail.com");
 		user.setPassword("dj8dqjwdhqjd");
-		String token = jwtService.generateToken(user);
+		String token = jwtService.generateAccessToken(user);
 
 		System.out.println("Generated Token: " + token);
 
