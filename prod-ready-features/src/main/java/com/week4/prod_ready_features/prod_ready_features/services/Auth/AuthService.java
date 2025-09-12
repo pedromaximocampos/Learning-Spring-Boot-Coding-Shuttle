@@ -30,7 +30,7 @@ public class AuthService {
     private final ModelMapper modelMapper;
     private final JwtService jwtService;
     private final UserService userService;
-    // private final UserSessionService userSessionService;
+    private final UserSessionService userSessionService;
 
 
     public UserDTO signUp(SignUpDTO signUpDTO){
@@ -59,7 +59,7 @@ public class AuthService {
 
         String refreshTokenJwt = jwtService.generateRefreshToken(userEntity);
 
-        // userSessionService.createNewUserSession(tokenJwt, userEntity.getId());
+        userSessionService.createNewUserSession(refreshTokenJwt, userEntity);
 
         return new LoginResponseDTO(userEntity.getId(), tokenJwt, refreshTokenJwt);
     }
@@ -67,7 +67,7 @@ public class AuthService {
 
     public LoginResponseDTO refreshToken(String refreshToken){
         Long userId = jwtService.getUserIdFromToken(refreshToken);
-
+        userSessionService.validateSession(refreshToken);
         UserEntity userEntity = userService.getUserById(userId);
 
         String newAccessToken = jwtService.generateAccessToken(userEntity);

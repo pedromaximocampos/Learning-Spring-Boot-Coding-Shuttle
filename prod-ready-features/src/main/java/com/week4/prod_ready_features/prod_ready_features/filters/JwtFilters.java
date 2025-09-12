@@ -32,7 +32,7 @@ public class JwtFilters extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserService userService;
-    private final UserSessionService userSessionService;
+
 
     // Temos que injetar o HandlerExceptionResolver para tratar exceções dentro do filtro, pois o contexto do filtro
     // não é o mesmo do contexto do controller, logo o @ControllerAdvice não funciona aqui.
@@ -60,10 +60,6 @@ public class JwtFilters extends OncePerRequestFilter {
 
             if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserEntity userEntity = userService.getUserById(userId);
-
-                if(!userSessionService.isSessionValid(jwt, userId)){
-                    throw new JwtException("Invalid session. Please log in again.");
-                }
 
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         userEntity, null, null

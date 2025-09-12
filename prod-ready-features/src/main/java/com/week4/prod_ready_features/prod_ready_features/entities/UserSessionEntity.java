@@ -3,6 +3,10 @@ package com.week4.prod_ready_features.prod_ready_features.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.catalina.User;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,9 +21,12 @@ public class UserSessionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private Long userId;
+    @ManyToOne
+    private UserEntity user;
 
     @Column(nullable = false)
-    private String sessionToken;
+    private String refreshToken;
+
+    @CreationTimestamp
+    private LocalDateTime lastLoginAt;
 }
