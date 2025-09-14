@@ -3,9 +3,11 @@ package com.week4.prod_ready_features.prod_ready_features.services.Posts;
 import com.week4.prod_ready_features.prod_ready_features.dto.Posts.PostCreationDTO;
 import com.week4.prod_ready_features.prod_ready_features.dto.Posts.PostResponseDTO;
 import com.week4.prod_ready_features.prod_ready_features.entities.PostEntity;
+import com.week4.prod_ready_features.prod_ready_features.entities.UserEntity;
 import com.week4.prod_ready_features.prod_ready_features.exceptions.ResourceNotFoundException;
 import com.week4.prod_ready_features.prod_ready_features.repositories.PostRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +35,9 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostResponseDTO createPost(PostCreationDTO postCreationDTO) {
+        UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         PostEntity postEntity = modelMapper.map(postCreationDTO, PostEntity.class);
+        postEntity.setAuthor(user);
         PostEntity savedPostEntity= postRepository.save(postEntity);
 
         return modelMapper.map(savedPostEntity, PostResponseDTO.class);

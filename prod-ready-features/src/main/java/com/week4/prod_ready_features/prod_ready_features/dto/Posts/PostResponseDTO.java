@@ -1,5 +1,6 @@
 package com.week4.prod_ready_features.prod_ready_features.dto.Posts;
 
+import com.week4.prod_ready_features.prod_ready_features.entities.UserEntity;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,5 +18,7 @@ public class PostResponseDTO {
 
         @NotNull
         private String description;
+
+        private UserEntity author;
 
 }
