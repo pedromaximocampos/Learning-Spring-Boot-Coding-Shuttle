@@ -5,14 +5,17 @@ import com.week4.prod_ready_features.prod_ready_features.dto.Employees.EmployeeD
 import com.week4.prod_ready_features.prod_ready_features.entities.UserEntity;
 import com.week4.prod_ready_features.prod_ready_features.services.Auth.JwtService;
 import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.data.Offset;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Slf4j
 @SpringBootTest
 @RequiredArgsConstructor
 class ProdReadyFeaturesApplicationTests {
@@ -22,6 +25,73 @@ class ProdReadyFeaturesApplicationTests {
 
 	@Autowired
 	private JwtService jwtService;
+
+	@BeforeAll
+	static void setupAll(){
+		log.info("Setting up all methods");
+	}
+
+	@BeforeEach
+	void setupEach(){
+		log.info("Setting up each method");
+	}
+
+	@AfterAll
+	static void finishingAll(){
+		log.info("Finishig all methods");
+	}
+
+	@AfterEach
+	void finishEach(){
+		log.info("Finishing each method");
+	}
+
+
+	@Test
+	void tryingToSumTwoIntegersNumbers(){
+		int a = 3;
+		int b = 5;
+
+		int result = sumTwoNumbers(a, b);
+
+		Assertions.assertThat(result)
+				.isEqualTo(8)
+				.isCloseTo(9, Offset.offset(1));
+
+
+//		Assertions.assertThat("Apple")
+//				.isEqualTo("Apple")
+//				.hasSize(5)
+//				.startsWith("App")
+//				.endsWith("le");
+	}
+
+
+	@Test
+	void divideTwoNumbers_whenTheDenominatorIsEqualToZero(){
+		int a = 4;
+		int b = 0;
+
+		Assertions.assertThatThrownBy(() -> divideTwoNumbers(a, b))
+				.isInstanceOf(ArithmeticException.class)
+				.hasMessage("division by zero");
+	}
+
+
+	int sumTwoNumbers(int a, int b){
+		return a + b;
+	}
+
+
+	double divideTwoNumbers(int a, int b){
+		try{
+			double result =  a / b;
+
+			return result;
+		}catch (ArithmeticException e){
+			throw  new ArithmeticException("division by zero");
+		}
+	}
 
 
 	//@Test
@@ -67,5 +137,9 @@ class ProdReadyFeaturesApplicationTests {
 		System.out.println("Extracted User ID from Token: " + userId);
 
 	}
+
+
+
+
 
 }
