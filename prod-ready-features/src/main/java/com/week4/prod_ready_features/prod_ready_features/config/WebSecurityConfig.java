@@ -1,5 +1,6 @@
 package com.week4.prod_ready_features.prod_ready_features.config;
 
+import com.week4.prod_ready_features.prod_ready_features.entities.enums.Role;
 import com.week4.prod_ready_features.prod_ready_features.filters.JwtFilters;
 import com.week4.prod_ready_features.prod_ready_features.filters.LogsFilters;
 import com.week4.prod_ready_features.prod_ready_features.handlers.OAuth2SuccessHandler;
@@ -7,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,11 +28,17 @@ public class WebSecurityConfig {
     private final LogsFilters logsFilters;
     private final OAuth2SuccessHandler OAuth2SuccessHandler;
 
+    private static final String[] publicRoutes = {
+            "/auth/**", "/error", "/public/**", "/home"
+    };
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/error", "/public/**", "/home").permitAll()
+                        .requestMatchers(publicRoutes).permitAll()
+                        .requestMatchers(HttpMethod.GET, "/posts/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/posts/**").hasAnyRole(Role.ADMIN.name(), Role.CREATOR.name())
                         .anyRequest().authenticated())
                 .csrf(csrfConfig -> csrfConfig.disable())
                 .sessionManagement(sessionConfig -> sessionConfig

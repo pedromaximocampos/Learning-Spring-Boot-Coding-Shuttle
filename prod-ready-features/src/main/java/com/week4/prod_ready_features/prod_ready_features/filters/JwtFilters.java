@@ -62,7 +62,7 @@ public class JwtFilters extends OncePerRequestFilter {
                 UserEntity userEntity = userService.getUserById(userId);
 
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                        userEntity, null, null
+                        userEntity, null, userEntity.getAuthorities()
                 );
                 // pega dados da requisição do usuario Ip, sessao, localização
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
