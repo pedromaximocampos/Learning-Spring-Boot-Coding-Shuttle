@@ -45,4 +45,10 @@ public class UserSessionService {
 
         userSessionRepository.save(userSessionEntity);
     }
+
+    public void deleteSession(String refreshToken, Long userId) {
+        UserSessionEntity session  = userSessionRepository.findByRefreshToken(refreshToken)
+                .orElseThrow(() -> new SessionAuthenticationException("Session not found exception"));
+        userSessionRepository.deleteByRefreshTokenAndUserId(refreshToken, userId);
+    }
 }

@@ -16,4 +16,10 @@ public interface UserSessionRepository extends JpaRepository<UserSessionEntity, 
     Optional<UserSessionEntity> findByRefreshToken(String refreshToken);
 
     void deleteByUserId(Long userId);
+
+    void deleteByRefreshToken(String refreshToken);
+
+    void deleteByRefreshTokenAndUserId(String refreshToken, Long userId);
+
+    int countByUserId(Long userId);
 }
