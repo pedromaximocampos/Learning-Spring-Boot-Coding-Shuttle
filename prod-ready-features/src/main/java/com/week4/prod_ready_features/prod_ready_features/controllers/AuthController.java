@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -35,7 +36,7 @@ public class AuthController {
     @PostMapping("/signUp")
     public ResponseEntity<UserDTO> signUp(@RequestBody SignUpDTO signUpDTO) {
         UserDTO userDTO = authService.signUp(signUpDTO);
-        return ResponseEntity.ok(userDTO);
+        return  new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
@@ -73,6 +74,8 @@ public class AuthController {
         //Apagando o cookie do refreshToken
         Cookie cookie = authService.deleteSecuredRefreshTokenCookie(refreshToken);
         response.addCookie(cookie);
+
+        System.out.println(logoutResponseDTO.getMessage());
 
         return ResponseEntity.ok(logoutResponseDTO);
     }

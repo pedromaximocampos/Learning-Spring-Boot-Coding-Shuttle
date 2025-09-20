@@ -7,6 +7,7 @@ import com.week4.prod_ready_features.prod_ready_features.dto.Auth.LogoutResponse
 import com.week4.prod_ready_features.prod_ready_features.dto.Auth.SignUpDTO;
 import com.week4.prod_ready_features.prod_ready_features.dto.Users.UserDTO;
 import com.week4.prod_ready_features.prod_ready_features.entities.UserEntity;
+import com.week4.prod_ready_features.prod_ready_features.exceptions.UserAlreadyExistsException;
 import com.week4.prod_ready_features.prod_ready_features.repositories.UserRepository;
 import com.week4.prod_ready_features.prod_ready_features.repositories.UserSessionRepository;
 import com.week4.prod_ready_features.prod_ready_features.services.Users.UserService;
@@ -47,7 +48,7 @@ public class AuthService {
 
         Optional<UserEntity> userEntity = userRepository.findByEmail(signUpDTO.getEmail());
         if(userEntity.isPresent()){
-            throw new BadCredentialsException("User already exists with email: " + signUpDTO.getEmail());
+            throw new UserAlreadyExistsException("User already exists with email: " + signUpDTO.getEmail());
         }
 
         UserEntity newUser = modelMapper.map(signUpDTO, UserEntity.class);
@@ -103,7 +104,7 @@ public class AuthService {
         Long userId = jwtService.getUserIdFromToken(refreshToken);
         userSessionService.deleteSession(refreshToken, userId);
 
-        return new LogoutResponseDTO("User successfully logged out");
+        return LogoutResponseDTO.builder().message("User successfully logged out").build();
     }
 
     public Cookie createNewSecuredRefreshTokenCookie(String refreshToken){

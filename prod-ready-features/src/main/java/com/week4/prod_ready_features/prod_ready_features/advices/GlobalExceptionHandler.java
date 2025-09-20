@@ -1,6 +1,7 @@
 package com.week4.prod_ready_features.prod_ready_features.advices;
 
 import com.week4.prod_ready_features.prod_ready_features.exceptions.ResourceNotFoundException;
+import com.week4.prod_ready_features.prod_ready_features.exceptions.UserAlreadyExistsException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +40,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiError> handleAccessDeniedException(AccessDeniedException ex) {
         ApiError apiError = new ApiError(HttpStatus.FORBIDDEN, ex.getMessage());
         return new ResponseEntity<>(apiError, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<ApiError> handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
+        ApiError apiError = new ApiError(HttpStatus.CONFLICT, ex.getMessage());
+        return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
     }
 }
