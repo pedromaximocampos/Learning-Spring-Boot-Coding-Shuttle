@@ -105,6 +105,12 @@ Este repositório reúne projetos do curso que ensina os fundamentos de Spring B
 - Kubernetes deployment
 - Service Mesh com Istio
 
+## Projeto proposto por este curso
+
+Como parte da prática sugerida neste curso, o projeto final consiste em implementar um clone do back-end da Uber utilizando Java com Spring Boot.
+
+Minha implementação completa está disponível neste repositório: [spring-uber-backend](https://github.com/pedromaximocampos/spring-uber-backend)
+
 ## Certificado do Curso
 
 Você poderá visualizar o certificado diretamente neste repositório e por meio deste [link](https://app.codingshuttle.com/certificate/verify/3NAQG5JP) público fornecido pela plataforma do curso.
